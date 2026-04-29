@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WIRA Labs — Waste Innovation & Resource Action</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Karla:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sky: #2a5888;
+      --sky-light: #78b4d0;
+      --forest: #1e3a1e;
+      --forest-mid: #2a5838;
+      --forest-light: #527052;
+      --leaf: #b0c8b0;
+      --cream: #f2f6f2;
+      --ink: #1a2018;
+      --ink-light: #3a4a3a;
+      --sand: #c8d8c8;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Karla', Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--ink); font-family: var(--font-sans); font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 3rem; background: rgba(242,246,242,0.92);
+      backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--leaf);
+    }
+    .nav-brand { font-family: var(--font-serif); font-size: 1.1rem; color: var(--ink); }
+    .nav-brand span { display: block; font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--forest-light); margin-top: 1px; }
+    .nav-links { list-style: none; display: flex; gap: 2.5rem; }
+    .nav-links a { font-size: 0.75rem; letter-spacing: 0.1em; color: var(--forest-light); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta { font-size: 0.72rem; letter-spacing: 0.1em; padding: 0.45rem 1.1rem; border: 1px solid var(--sky); color: var(--sky); transition: all 0.2s; }
+    .nav-cta:hover { background: var(--sky); color: white; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; position: relative; display: flex; align-items: flex-end;
+      padding: 0 3rem 5rem; overflow: hidden;
+    }
+    .hero-sky {
+      position: absolute; top: 0; left: 0; right: 0; height: 45%;
+      background: linear-gradient(to bottom, #1e3f6e, var(--sky));
+    }
+    .hero-mountain {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 62%;
+      background: var(--forest);
+    }
+    .hero-mountain::before {
+      content: ''; position: absolute; top: -44px; left: 0; right: 0; height: 88px;
+      background: var(--forest);
+      clip-path: polygon(0 100%,6% 30%,12% 65%,20% 10%,28% 55%,36% 5%,44% 48%,52% 8%,60% 45%,68% 2%,76% 40%,84% 8%,92% 38%,100% 0%,100% 100%);
+    }
+    .hero-forest-floor {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 15%;
+      background: #152815;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 620px; }
+    .hero-kicker { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sky-light); margin-bottom: 1rem; }
+    .hero-title { font-family: var(--font-serif); font-weight: 300; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.05; color: #eef4ee; margin-bottom: 1.2rem; }
+    .hero-title em { font-style: italic; color: var(--sky-light); }
+    .hero-sub { font-size: 0.9rem; color: rgba(238,244,238,0.62); line-height: 1.65; max-width: 440px; margin-bottom: 2rem; }
+    .hero-actions { display: flex; gap: 1rem; }
+    .btn-primary { font-size: 0.72rem; letter-spacing: 0.1em; padding: 0.7rem 1.5rem; background: var(--sky-light); color: var(--forest); border: none; cursor: pointer; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary { font-size: 0.72rem; letter-spacing: 0.1em; padding: 0.7rem 1.5rem; border: 1px solid rgba(238,244,238,0.4); color: #eef4ee; background: transparent; cursor: pointer; transition: all 0.2s; }
+    .btn-secondary:hover { background: rgba(238,244,238,0.1); }
+
+    /* ── STATS ── */
+    .stats { display: grid; grid-template-columns: repeat(4,1fr); border-bottom: 0.5px solid var(--leaf); }
+    .stat { padding: 1.8rem 1.5rem; border-right: 0.5px solid var(--leaf); }
+    .stat:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 300; color: var(--forest-mid); margin-bottom: 0.2rem; }
+    .stat-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--forest-light); }
+
+    /* ── SECTION SHARED ── */
+    .section-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--forest-light); margin-bottom: 0.8rem; }
+
+    /* ── ABOUT ── */
+    .about { padding: 4rem 3rem; display: grid; grid-template-columns: 1fr 1.7fr; gap: 5rem; border-bottom: 0.5px solid var(--leaf); align-items: start; }
+    .about-title { font-family: var(--font-serif); font-weight: 300; font-size: 2rem; line-height: 1.2; color: var(--ink); }
+    .about-body p { font-size: 1rem; line-height: 1.75; color: var(--ink-light); margin-bottom: 1rem; }
+    .about-body p:last-child { margin-bottom: 0; }
+
+    /* ── PRODUCTS ── */
+    .products { border-bottom: 0.5px solid var(--leaf); }
+    .products-header { padding: 2rem 3rem 1rem; }
+    .products-header h2 { font-family: var(--font-serif); font-weight: 300; font-size: 2rem; }
+    .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5px; background: var(--leaf); }
+    .product-card { background: var(--cream); padding: 2.5rem; }
+    .product-tag { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.22rem 0.65rem; border: 1px solid; display: inline-block; margin-bottom: 1.2rem; }
+    .product-tag--glass { color: var(--sky); border-color: var(--sky); }
+    .product-tag--fabric { color: var(--forest-mid); border-color: var(--forest-mid); }
+    .product-img { height: 160px; background: #ddeadd; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 0.62rem; letter-spacing: 0.1em; color: #7a9a7a; text-transform: uppercase; }
+    .product-card h3 { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 400; margin-bottom: 0.5rem; }
+    .product-card p { font-size: 0.82rem; color: var(--forest-light); line-height: 1.6; margin-bottom: 1rem; }
+    .product-spec { font-size: 0.7rem; color: #3a5a3a; border-top: 0.5px solid var(--leaf); padding-top: 0.8rem; line-height: 1.7; }
+
+    /* ── FOUNDERS ── */
+    .founders { border-bottom: 0.5px solid var(--leaf); }
+    .founders-header { padding: 2rem 3rem 0; }
+    .founders-header h2 { font-family: var(--font-serif); font-weight: 300; font-size: 2rem; }
+    .founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5px; background: var(--leaf); margin-top: 1rem; }
+    .founder-card { background: var(--forest); padding: 2.5rem; }
+    .founder-img { height: 180px; background: #1e3a1e; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--forest-light); text-transform: uppercase; }
+    .founder-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sky-light); margin-bottom: 0.4rem; }
+    .founder-name { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 300; color: #eef4ee; margin-bottom: 0.3rem; }
+    .founder-role { font-size: 0.72rem; color: rgba(238,244,238,0.48); margin-bottom: 1rem; }
+    .founder-bio { font-family: var(--font-serif); font-size: 0.95rem; line-height: 1.7; color: rgba(238,244,238,0.72); }
+    .founder-product { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sky-light); margin-top: 1rem; padding-top: 1rem; border-top: 0.5px solid rgba(238,244,238,0.12); }
+
+    /* ── HOW IT WORKS ── */
+    .how { padding: 4rem 3rem; border-bottom: 0.5px solid var(--leaf); }
+    .how-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.5px; background: var(--leaf); margin-top: 1.5rem; }
+    .how-step { background: var(--cream); padding: 1.8rem; }
+    .step-num { font-family: var(--font-serif); font-size: 2rem; color: var(--leaf); margin-bottom: 0.5rem; }
+    .how-step h3 { font-family: var(--font-serif); font-size: 1rem; font-weight: 400; margin-bottom: 0.4rem; }
+    .how-step p { font-size: 0.75rem; color: var(--forest-light); line-height: 1.55; }
+
+    /* ── FUND ── */
+    .fund { padding: 4rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-bottom: 0.5px solid var(--leaf); background: var(--sky); }
+    .fund-left { padding-right: 3rem; border-right: 0.5px solid rgba(238,244,238,0.2); }
+    .fund-right { padding-left: 3rem; }
+    .fund-label { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sky-light); margin-bottom: 0.5rem; }
+    .fund-title { font-family: var(--font-serif); font-weight: 300; font-size: 1.6rem; margin-bottom: 0.8rem; color: #eef4ee; }
+    .fund-body { font-size: 0.82rem; color: rgba(238,244,238,0.65); line-height: 1.65; margin-bottom: 1.5rem; }
+    .fund-btn { font-size: 0.72rem; letter-spacing: 0.1em; padding: 0.7rem 1.5rem; border: 1px solid #eef4ee; color: #eef4ee; background: transparent; cursor: pointer; display: inline-block; transition: all 0.2s; }
+    .fund-btn:hover { background: rgba(238,244,238,0.1); }
+    .fund-btn-primary { background: #eef4ee; color: var(--sky); border-color: #eef4ee; }
+    .fund-btn-primary:hover { opacity: 0.88; background: #eef4ee; }
+
+    /* ── FOOTER ── */
+    footer { padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 0.5px solid var(--leaf); }
+    .footer-brand { font-family: var(--font-serif); font-size: 1rem; }
+    .footer-brand span { display: block; font-family: var(--font-sans); font-size: 0.62rem; color: var(--forest-light); margin-top: 2px; }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-links a { font-size: 0.7rem; letter-spacing: 0.08em; color: var(--forest-light); }
+    .footer-note { font-size: 0.65rem; color: var(--sand); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 0 1.5rem 4rem; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .about { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
+      .products-grid, .founders-grid { grid-template-columns: 1fr; }
+      .products-header, .founders-header { padding: 2rem 1.5rem 1rem; }
+      .how { padding: 3rem 1.5rem; }
+      .how-steps { grid-template-columns: 1fr 1fr; }
+      .fund { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      .fund-left { padding-right: 0; border-right: none; border-bottom: 0.5px solid rgba(238,244,238,0.2); padding-bottom: 2.5rem; margin-bottom: 2.5rem; }
+      .fund-right { padding-left: 0; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .stats { grid-template-columns: 1fr 1fr; }
+      .how-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-brand">
+      WIRA Labs
+      <span>Waste · Innovation · Resource · Action</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#products">products</a></li>
+      <li><a href="#founders">founders</a></li>
+      <li><a href="#fund">contact</a></li>
+    </ul>
+    <a href="#fund" class="nav-cta">Fund us</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-sky"></div>
+    <div class="hero-mountain"></div>
+    <div class="hero-forest-floor"></div>
+    <div class="hero-content">
+      <p class="hero-kicker">Kangra Valley, Himachal Pradesh · Est. 2025</p>
+      <h1 class="hero-title">
+        Wealth from<br/>
+        <em>waste.</em><br/>
+        Built for the<br/>
+        mountain.
+      </h1>
+      <p class="hero-sub">WIRA Labs turns construction debris and textile waste into circular economy products for last-mile mountain regions — where no formal model has reached before.</p>
+      <div class="hero-actions">
+        <a href="#fund" class="btn-primary">Fund this work</a>
+        <a href="#about" class="btn-secondary">Learn more →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Woman led</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Circular products</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Waste to landfill</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">HP</div>
+      <div class="stat-label">Himachal Pradesh</div>
+    </div>
+  </div>
+
+  <section class="about" id="about">
+    <div>
+      <p class="section-label">The problem</p>
+      <h2 class="about-title">Last-mile mountain regions are drowning in waste that no model can reach.</h2>
+    </div>
+    <div class="about-body">
+      <p>Every circularity model assumes urban infrastructure — collection systems, processing facilities, formal supply chains. In last-mile Himalayan regions, none of that exists. Construction debris and textile waste accumulate in riverbeds and village commons. The communities bear the cost.</p>
+      <p>WIRA Labs builds the missing infrastructure from the ground up — community-sourced supply chains, local processing, and products designed for the mountain construction market. Wealth from waste. Made here. For here.</p>
+    </div>
+  </section>
+
+  <section class="products" id="products">
+    <div class="products-header">
+      <p class="section-label">What we make</p>
+      <h2>Our products</h2>
+    </div>
+    <div class="products-grid">
+      <div class="product-card">
+        <span class="product-tag product-tag--glass">Waste Glass</span>
+        <div class="product-img">photograph — glass tiles</div>
+        <h3>Waste Glass Tiles</h3>
+        <p>Construction and demolition glass collected from Kangra Valley villages, processed locally, and transformed into affordable building tiles for the mountain construction market.</p>
+        <div class="product-spec">
+          Material: C&D glass waste · Process: local cold-processing<br/>
+          Market: mountain construction industry · Location: Himachal Pradesh
+        </div>
+      </div>
+      <div class="product-card">
+        <span class="product-tag product-tag--fabric">Waste Fabric</span>
+        <div class="product-img">photograph — fabric panels</div>
+        <h3>Waste Fabric Panels</h3>
+        <p>Textile waste sourced from local production and household discard, transformed into acoustic and insulation panels suited to the temperature demands of mountain construction.</p>
+        <div class="product-spec">
+          Material: textile & fabric waste · Process: compression & bonding<br/>
+          Market: mountain construction industry · Location: Himachal Pradesh
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="founders" id="founders">
+    <div class="founders-header">
+      <p class="section-label">The people</p>
+      <h2>Founded by</h2>
+    </div>
+    <div class="founders-grid">
+      <div class="founder-card">
+        <div class="founder-img">photograph — Vaibhavi Kowshik</div>
+        <p class="founder-label">Co-Founder</p>
+        <p class="founder-name">Vaibhavi Kowshik</p>
+        <p class="founder-role">Artist · Researcher · Social Entrepreneur · Andretta, Kangra Valley</p>
+        <p class="founder-bio">Working at the intersection of art, ecology, and circular economy in the Western Himalayas. Vaibhavi has spent years documenting waste accumulation, building community supply chains, and developing circularity models that function without formal infrastructure.</p>
+        <p class="founder-product">Leading — Waste Fabric Panels</p>
+      </div>
+      <div class="founder-card">
+        <div class="founder-img">photograph — Vijay Kowshik</div>
+        <p class="founder-label">Co-Founder</p>
+        <p class="founder-name">Vijay Kowshik</p>
+        <p class="founder-role">Glass Artist · Material Innovator · Andretta, Kangra Valley</p>
+        <p class="founder-bio">A glass artist with decades of practice in material transformation. Vijay brings deep expertise in the properties of glass — how it breaks, how it can be remade, and what it becomes when returned to use with skill and intention.</p>
+        <p class="founder-product">Leading — Waste Glass Tiles</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <p class="section-label">How it works</p>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="step-num">01</div>
+        <h3>Community collection</h3>
+        <p>Village-level supply chains source C&D glass and fabric waste — creating income at the point of collection.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">02</div>
+        <h3>Local processing</h3>
+        <p>Energy-efficient methods adapted to mountain contexts. No heavy machinery. No urban dependency.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">03</div>
+        <h3>Product making</h3>
+        <p>Waste glass becomes tiles. Waste fabric becomes panels. Refuse becomes resource.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">04</div>
+        <h3>Mountain market</h3>
+        <p>Affordable locally made products sold to the mountain construction industry — closing the circle.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="fund" id="fund">
+    <div class="fund-left">
+      <p class="fund-label">Fund</p>
+      <h2 class="fund-title">Support last-mile circularity</h2>
+      <p class="fund-body">Your support funds community waste collection networks, local processing development, and the proof-of-concept that shows this model can scale across mountain regions in India and beyond.</p>
+      <a href="mailto:wiralabs@gmail.com" class="fund-btn fund-btn-primary">Fund WIRA Labs</a>
+    </div>
+    <div class="fund-right">
+      <p class="fund-label">Partner</p>
+      <h2 class="fund-title">Work with us</h2>
+      <p class="fund-body">We are looking for institutional partners, impact investors, and researchers who understand that the next frontier of circular economy is in the places formal models cannot reach.</p>
+      <a href="mailto:wiralabs@gmail.com" class="fund-btn">Get in touch</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">
+      WIRA Labs
+      <span>Andretta, Kangra Valley, Himachal Pradesh, India</span>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#products">products</a></li>
+      <li><a href="#founders">founders</a></li>
+      <li><a href="#fund">contact</a></li>
+    </ul>
+    <p class="footer-note">© 2026 WIRA Labs</p>
+  </footer>
+
+</body>
+</html>
